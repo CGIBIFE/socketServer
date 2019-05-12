@@ -4,9 +4,10 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/dist/quizda/index.html');
+    res.send('Server started');
 })
-app.use(express.static(__dirname + '/dist/quizda/'));
+/*app.use(express.static(__dirname + '/dist/quizda/'));*/
+const port = process.env.PORT || 80;
 
 io.on('connection',(socket) => {
     socket.on('create', (room) => {
@@ -41,6 +42,6 @@ io.on('connection',(socket) => {
 
 })
 
-http.listen(3000, function () {
-    console.log('Localhost:3000')
+http.listen(port, function () {
+    console.log(port)
 })
